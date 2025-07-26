@@ -1,0 +1,17 @@
+```json
+{
+  "name": "rohith-vuppula-portfolio",
+  "version": "1.0.0",
+  "description": "Frontend portfolio for Rohith Vuppula",
+  "main": "index.html",
+  "scripts": {
+    "start": "serve -s .",
+    "deploy": "vercel --prod"
+  },
+  "author": "Rohith Vuppula",
+  "license": "MIT",
+  "dependencies": {
+    "serve": "^14.2.3"
+  }
+}
+```
