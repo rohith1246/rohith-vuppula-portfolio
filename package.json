@@ -1,8 +1,7 @@
-```json
 {
   "name": "rohith-vuppula-portfolio",
   "version": "1.0.0",
-  "description": "Frontend portfolio for Rohith Vuppula",
+  "description": "Comprehensive portfolio for Rohith Vuppula",
   "main": "index.html",
   "scripts": {
     "start": "serve -s .",
@@ -14,4 +13,3 @@
     "serve": "^14.2.3"
   }
 }
-```
