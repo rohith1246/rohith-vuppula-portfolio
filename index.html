@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rohith Vuppula - Turning Ideas Into Impact</title>
+    <title>Rohith Vuppula - Software Engineering Student</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
@@ -69,18 +69,6 @@
             box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
         }
         
-        .tech-orbit {
-            position: absolute;
-            border: 2px solid rgba(99, 102, 241, 0.2);
-            border-radius: 50%;
-            animation: rotate 20s linear infinite;
-        }
-        
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        
         .skill-badge {
             transition: all 0.3s ease;
             cursor: pointer;
@@ -100,17 +88,6 @@
             transform: translateY(-10px) rotateX(5deg);
         }
         
-        .easter-egg {
-            position: fixed;
-            top: 10px;
-            left: 10px;
-            width: 20px;
-            height: 20px;
-            opacity: 0;
-            cursor: pointer;
-            z-index: 1000;
-        }
-        
         .typewriter {
             overflow: hidden;
             border-right: .15em solid var(--primary);
@@ -128,11 +105,6 @@
             50% { border-color: var(--primary); }
         }
         
-        .parallax {
-            transform: translateZ(0);
-            will-change: transform;
-        }
-        
         .nav-blur {
             backdrop-filter: blur(20px);
             background: rgba(255, 255, 255, 0.8);
@@ -140,12 +112,6 @@
         
         .dark .nav-blur {
             background: rgba(15, 23, 42, 0.8);
-        }
-        
-        #tech-universe {
-            height: 400px;
-            position: relative;
-            overflow: hidden;
         }
         
         .timeline-item {
@@ -177,21 +143,53 @@
             justify-content: center;
         }
         
-        .blog-card {
-            transition: all 0.3s ease;
-            border-left: 4px solid transparent;
+        .progress-bar {
+            height: 8px;
+            background: rgba(99, 102, 241, 0.2);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 8px;
         }
         
-        .blog-card:hover {
-            border-left-color: var(--primary);
-            transform: translateX(10px);
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #6366f1, #8b5cf6);
+            border-radius: 4px;
+            transition: width 2s ease;
+        }
+        
+        .stat-counter {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        
+        .achievement-badge {
+            background: linear-gradient(135deg, #fbbf24, #f59e0b);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .mobile-menu {
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-menu.active {
+            transform: translateX(0);
         }
     </style>
 </head>
 <body data-theme="dark" class="dark">
-    <!-- Easter Egg -->
-    <div class="easter-egg" onclick="showEasterEgg()"></div>
-    
     <!-- Navigation -->
     <nav class="fixed top-0 w-full z-50 nav-blur transition-all duration-300" id="navbar">
         <div class="container mx-auto px-6 py-4">
@@ -201,8 +199,9 @@
                     <a href="#home" class="nav-link hover:text-indigo-600 transition-colors">Home</a>
                     <a href="#about" class="nav-link hover:text-indigo-600 transition-colors">About</a>
                     <a href="#projects" class="nav-link hover:text-indigo-600 transition-colors">Projects</a>
-                    <a href="#tech-stack" class="nav-link hover:text-indigo-600 transition-colors">Tech Stack</a>
-                    <a href="#blog" class="nav-link hover:text-indigo-600 transition-colors">Blog</a>
+                    <a href="#experience" class="nav-link hover:text-indigo-600 transition-colors">Experience</a>
+                    <a href="#tech-stack" class="nav-link hover:text-indigo-600 transition-colors">Skills</a>
+                    <a href="#certifications" class="nav-link hover:text-indigo-600 transition-colors">Certifications</a>
                     <a href="#contact" class="nav-link hover:text-indigo-600 transition-colors">Contact</a>
                 </div>
                 <div class="flex items-center space-x-4">
@@ -216,20 +215,42 @@
                 </div>
             </div>
         </div>
+        
+        <!-- Mobile Menu -->
+        <div class="mobile-menu md:hidden fixed top-0 left-0 w-64 h-full bg-white dark:bg-gray-900 shadow-lg z-40" id="mobileMenu">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-8">
+                    <div class="text-2xl font-bold text-indigo-600">RV</div>
+                    <button onclick="toggleMobileMenu()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="space-y-4">
+                    <a href="#home" class="block py-2 hover:text-indigo-600 transition-colors" onclick="toggleMobileMenu()">Home</a>
+                    <a href="#about" class="block py-2 hover:text-indigo-600 transition-colors" onclick="toggleMobileMenu()">About</a>
+                    <a href="#projects" class="block py-2 hover:text-indigo-600 transition-colors" onclick="toggleMobileMenu()">Projects</a>
+                    <a href="#experience" class="block py-2 hover:text-indigo-600 transition-colors" onclick="toggleMobileMenu()">Experience</a>
+                    <a href="#tech-stack" class="block py-2 hover:text-indigo-600 transition-colors" onclick="toggleMobileMenu()">Skills</a>
+                    <a href="#certifications" class="block py-2 hover:text-indigo-600 transition-colors" onclick="toggleMobileMenu()">Certifications</a>
+                    <a href="#contact" class="block py-2 hover:text-indigo-600 transition-colors" onclick="toggleMobileMenu()">Contact</a>
+                </div>
+            </div>
+        </div>
     </nav>
 
-    <!-- Hero Section with Profile Image -->
+    <!-- Hero Section -->
     <section id="home" class="min-h-screen flex items-center justify-center hero-gradient relative overflow-hidden">
         <div class="absolute inset-0" id="particles"></div>
         <div class="container mx-auto px-6 text-center relative z-10">
             <div class="floating">
-                <img src="pic.jpeg" alt="Rohith Vuppula" class="w-32 h-32 mx-auto mb-8 rounded-full object-cover border-4 border-white">
+                <img src="pic.jpeg" alt="Rohith Vuppula" class="w-32 h-32 mx-auto mb-8 rounded-full border-4 border-white relative">
+                <div class="achievement-badge absolute -top-2 -right-2">New!</div>
             </div>
             <h1 class="text-5xl md:text-7xl font-bold mb-6 text-white">
-                <span class="typewriter">Turning Ideas Into Impact</span>
+                <span class="typewriter">Rohith Vuppula</span>
             </h1>
             <p class="text-xl md:text-2xl mb-8 text-gray-200">
-                Full-Stack Developer • AI Enthusiast • Blockchain Developer
+                Final-year Software Engineering Student • AI/ML Enthusiast • Full-Stack Developer
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
                 <button onclick="scrollToSection('projects')" class="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-3 rounded-full transition-all transform hover:scale-105 glow">
@@ -242,7 +263,7 @@
         </div>
     </section>
 
-    <!-- About Section with Timeline -->
+    <!-- About Section with Enhanced Stats -->
     <section id="about" class="py-20 bg-gray-50 dark:bg-gray-900">
         <div class="container mx-auto px-6">
             <h2 class="text-4xl font-bold text-center mb-16">About Me</h2>
@@ -254,8 +275,8 @@
                             <div class="flex items-center space-x-4">
                                 <div class="w-4 h-4 bg-indigo-600 rounded-full"></div>
                                 <div>
-                                    <h4 class="font-semibold">B.Tech CSE Student</h4>
-                                    <p class="text-gray-600 dark:text-gray-400">Balaji Institute of Technology & Science, Warangal</p>
+                                    <h4 class="font-semibold">B.Tech Software Engineering (2022-Present)</h4>
+                                    <p class="text-gray-600 dark:text-gray-400">Balaji Institute of Tech & Science, Warangal - CGPA: 7.75</p>
                                 </div>
                             </div>
                         </div>
@@ -263,8 +284,8 @@
                             <div class="flex items-center space-x-4">
                                 <div class="w-4 h-4 bg-purple-600 rounded-full"></div>
                                 <div>
-                                    <h4 class="font-semibold">AI/ML Internship</h4>
-                                    <p class="text-gray-600 dark:text-gray-400">Ncyopson - Real-time Image Classification</p>
+                                    <h4 class="font-semibold">AI-ML Intern (Jan 2025 - June 2025)</h4>
+                                    <p class="text-gray-600 dark:text-gray-400">Nextopson - Real-time Image Classification & NSFW Detection</p>
                                 </div>
                             </div>
                         </div>
@@ -272,8 +293,8 @@
                             <div class="flex items-center space-x-4">
                                 <div class="w-4 h-4 bg-yellow-600 rounded-full"></div>
                                 <div>
-                                    <h4 class="font-semibold">Blockchain Internship</h4>
-                                    <p class="text-gray-600 dark:text-gray-400">VOIS - AICTE & Vodafone Idea Foundation</p>
+                                    <h4 class="font-semibold">Hackathon Participant</h4>
+                                    <p class="text-gray-600 dark:text-gray-400">Salesforce & 1M1B Sustainability Hackathon (Oct 2024)</p>
                                 </div>
                             </div>
                         </div>
@@ -281,24 +302,71 @@
                 </div>
                 <div class="text-center">
                     <div class="glass p-8 rounded-2xl">
-                        <h3 class="text-xl font-semibold mb-4">Quick Facts</h3>
-                        <div class="grid grid-cols-2 gap-4 text-center">
-                            <div>
-                                <div class="text-2xl font-bold text-indigo-600">6+</div>
-                                <div class="text-sm">Projects</div>
+                        <h3 class="text-xl font-semibold mb-6">Academic & Professional Stats</h3>
+                        <div class="grid grid-cols-2 gap-6">
+                            <div class="text-center">
+                                <div class="stat-counter" data-target="7.75">0</div>
+                                <div class="text-sm text-gray-600 dark:text-gray-400">Current CGPA</div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 77.5%"></div>
+                                </div>
                             </div>
-                            <div>
-                                <div class="text-2xl font-bold text-purple-600">2</div>
-                                <div class="text-sm">Internships</div>
+                            <div class="text-center">
+                                <div class="stat-counter text-purple-600" data-target="3">0</div>
+                                <div class="text-sm text-gray-600 dark:text-gray-400">Major Projects</div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 60%"></div>
+                                </div>
                             </div>
-                            <div>
-                                <div class="text-2xl font-bold text-yellow-600">10+</div>
-                                <div class="text-sm">Technologies</div>
+                            <div class="text-center">
+                                <div class="stat-counter text-yellow-600" data-target="10">0</div>
+                                <div class="text-sm text-gray-600 dark:text-gray-400">Technologies</div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 80%"></div>
+                                </div>
                             </div>
-                            <div>
-                                <div class="text-2xl font-bold text-green-600">1</div>
-                                <div class="text-sm">Hackathon</div>
+                            <div class="text-center">
+                                <div class="stat-counter text-green-600" data-target="3">0</div>
+                                <div class="text-sm text-gray-600 dark:text-gray-400">Certifications</div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 90%"></div>
+                                </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-16">Work Experience</h2>
+            <div class="max-w-4xl mx-auto">
+                <div class="glass p-8 rounded-2xl">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-indigo-600 rounded-full flex items-center justify-center text-white font-bold">
+                            N
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-semibold mb-2">AI-ML Intern</h3>
+                            <h4 class="text-xl text-indigo-600 mb-2">Nextopson</h4>
+                            <p class="text-gray-600 dark:text-gray-400 mb-4">January 2025 – June 2025</p>
+                            <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+                                <li class="flex items-start space-x-2">
+                                    <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                                    <span>Developed and integrated real-time image classification and NSFW detection models into the nextdealAppServer backend using TensorFlow.js</span>
+                                </li>
+                                <li class="flex items-start space-x-2">
+                                    <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                                    <span>Enhanced content moderation and user experience through advanced ML implementations</span>
+                                </li>
+                                <li class="flex items-start space-x-2">
+                                    <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                                    <span>Achieved 85% accuracy for image classification and 87% for NSFW detection models</span>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -307,71 +375,77 @@
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="py-20">
+    <section id="projects" class="py-20 bg-gray-50 dark:bg-gray-900">
         <div class="container mx-auto px-6">
             <h2 class="text-4xl font-bold text-center mb-16">Featured Projects</h2>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Image Classification Model -->
+                <div class="project-card glass p-6 rounded-2xl">
+                    <div class="h-40 bg-gradient-to-br from-pink-500 to-red-600 rounded-lg mb-4 flex items-center justify-center relative">
+                        <i class="fas fa-brain text-4xl text-white"></i>
+                        <div class="achievement-badge absolute top-2 right-2">90% Accuracy</div>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Image Classification Model</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">Built using MobileNetV2 to categorize house rooms with 90% validation accuracy. Implemented data augmentation and preprocessing.</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="skill-badge bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded text-xs">Python</span>
+                        <span class="skill-badge bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 px-2 py-1 rounded text-xs">TensorFlow</span>
+                        <span class="skill-badge bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 py-1 rounded text-xs">Keras</span>
+                        <span class="skill-badge bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 px-2 py-1 rounded text-xs">MobileNetV2</span>
+                    </div>
+                    <div class="flex space-x-2">
+                        <button onclick="showProjectDemo('image-classification')" class="flex-1 bg-gray-800 hover:bg-gray-700 text-white py-2 rounded transition-colors">
+                            <i class="fab fa-github mr-2"></i>Code
+                        </button>
+                        <button onclick="showProjectDemo('image-classification')" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded transition-colors">
+                            <i class="fas fa-eye mr-2"></i>Demo
+                        </button>
+                    </div>
+                </div>
+
                 <!-- Alumni Networking Platform -->
                 <div class="project-card glass p-6 rounded-2xl">
-                    <div class="h-40 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg mb-4 flex items-center justify-center">
+                    <div class="h-40 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg mb-4 flex items-center justify-center relative">
                         <i class="fas fa-users text-4xl text-white"></i>
+                        <div class="achievement-badge absolute top-2 right-2">Full-Stack</div>
                     </div>
                     <h3 class="text-xl font-semibold mb-2">Alumni Networking Platform</h3>
-                    <p class="text-gray-600 dark:text-gray-400 mb-4">Full-stack platform for student-alumni mentorship with real-time messaging and job modules.</p>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">Full-stack platform connecting students with alumni for mentorship. Features real-time messaging and job/event modules.</p>
                     <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="skill-badge bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded text-xs">Django</span>
-                        <span class="skill-badge bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 py-1 rounded text-xs">WebSocket</span>
-                        <span class="skill-badge bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 px-2 py-1 rounded text-xs">Bootstrap</span>
+                        <span class="skill-badge bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 py-1 rounded text-xs">Django</span>
+                        <span class="skill-badge bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded text-xs">PostgreSQL</span>
+                        <span class="skill-badge bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 px-2 py-1 rounded text-xs">Bootstrap</span>
+                        <span class="skill-badge bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 px-2 py-1 rounded text-xs">WebSocket</span>
                     </div>
                     <div class="flex space-x-2">
-                        <a href="https://github.com/rohith1246/alumni_networking_platform" target="_blank" class="flex-1 bg-gray-800 hover:bg-gray-700 text-white text-center py-2 rounded transition-colors">
+                        <button onclick="window.open('https://github.com/rohith1246', '_blank')" class="flex-1 bg-gray-800 hover:bg-gray-700 text-white py-2 rounded transition-colors">
                             <i class="fab fa-github mr-2"></i>Code
-                        </a>
-                        <button class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded transition-colors">
+                        </button>
+                        <button onclick="showProjectDemo('alumni-platform')" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded transition-colors">
                             <i class="fas fa-eye mr-2"></i>Demo
                         </button>
                     </div>
                 </div>
 
-                <!-- Blockchain Land Registry -->
+                <!-- Internal Marks Management System -->
                 <div class="project-card glass p-6 rounded-2xl">
-                    <div class="h-40 bg-gradient-to-br from-green-500 to-teal-600 rounded-lg mb-4 flex items-center justify-center">
-                        <i class="fas fa-cube text-4xl text-white"></i>
+                    <div class="h-40 bg-gradient-to-br from-green-500 to-teal-600 rounded-lg mb-4 flex items-center justify-center relative">
+                        <i class="fas fa-chart-line text-4xl text-white"></i>
+                        <div class="achievement-badge absolute top-2 right-2">Secure</div>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">Blockchain Land Registry</h3>
-                    <p class="text-gray-600 dark:text-gray-400 mb-4">Decentralized application on Ethereum for secure land ownership management.</p>
+                    <h3 class="text-xl font-semibold mb-2">Internal Marks Management System</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">Web-based platform automating marks management with role-based access control and secure JWT authentication.</p>
                     <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="skill-badge bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 px-2 py-1 rounded text-xs">Solidity</span>
-                        <span class="skill-badge bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded text-xs">Web3.js</span>
-                        <span class="skill-badge bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200 px-2 py-1 rounded text-xs">Truffle</span>
-                    </div>
-                    <div class="flex space-x-2">
-                        <a href="https://github.com/rohith1246/Dapp-for-land-registry-system" target="_blank" class="flex-1 bg-gray-800 hover:bg-gray-700 text-white text-center py-2 rounded transition-colors">
-                            <i class="fab fa-github mr-2"></i>Code
-                        </a>
-                        <button class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded transition-colors">
-                            <i class="fas fa-eye mr-2"></i>Demo
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Real-time Image Classification -->
-                <div class="project-card glass p-6 rounded-2xl">
-                    <div class="h-40 bg-gradient-to-br from-pink-500 to-red-600 rounded-lg mb-4 flex items-center justify-center">
-                        <i class="fas fa-brain text-4xl text-white"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-2">AI Image Classification</h3>
-                    <p class="text-gray-600 dark:text-gray-400 mb-4">Real-time image classification with NSFW detection for content moderation.</p>
-                    <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="skill-badge bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 px-2 py-1 rounded text-xs">TensorFlow.js</span>
                         <span class="skill-badge bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 py-1 rounded text-xs">Node.js</span>
-                        <span class="skill-badge bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 px-2 py-1 rounded text-xs">ML</span>
+                        <span class="skill-badge bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 px-2 py-1 rounded text-xs">Express.js</span>
+                        <span class="skill-badge bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded text-xs">MySQL</span>
+                        <span class="skill-badge bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200 px-2 py-1 rounded text-xs">JWT</span>
                     </div>
                     <div class="flex space-x-2">
-                        <button class="flex-1 bg-gray-600 text-white py-2 rounded cursor-not-allowed">
-                            <i class="fab fa-github mr-2"></i>Private
+                        <button onclick="window.open('https://github.com/rohith1246', '_blank')" class="flex-1 bg-gray-800 hover:bg-gray-700 text-white py-2 rounded transition-colors">
+                            <i class="fab fa-github mr-2"></i>Code
                         </button>
-                        <button class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded transition-colors">
+                        <button onclick="showProjectDemo('marks-system')" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded transition-colors">
                             <i class="fas fa-eye mr-2"></i>Demo
                         </button>
                     </div>
@@ -380,100 +454,114 @@
         </div>
     </section>
 
-    <!-- Tech Stack Universe -->
-    <section id="tech-stack" class="py-20 bg-gray-50 dark:bg-gray-900">
+    <!-- Tech Stack Section -->
+    <section id="tech-stack" class="py-20">
         <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center mb-16">Tech Stack Universe</h2>
-            <div id="tech-universe" class="relative mx-auto max-w-4xl">
-                <!-- Tech orbits will be generated by JavaScript -->
-            </div>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12">
+            <h2 class="text-4xl font-bold text-center mb-16">Technical Skills</h2>
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
                 <div class="text-center">
-                    <div class="skill-badge w-16 h-16 mx-auto mb-2 bg-orange-500 rounded-full flex items-center justify-center text-white text-2xl">
-                        <i class="fab fa-html5"></i>
+                    <h3 class="text-xl font-semibold mb-4 text-indigo-600">Languages</h3>
+                    <div class="space-y-2">
+                        <div class="skill-badge bg-blue-600 text-white px-3 py-2 rounded-full">Java</div>
+                        <div class="skill-badge bg-yellow-600 text-white px-3 py-2 rounded-full">Python</div>
                     </div>
-                    <span class="text-sm">HTML5</span>
                 </div>
                 <div class="text-center">
-                    <div class="skill-badge w-16 h-16 mx-auto mb-2 bg-blue-500 rounded-full flex items-center justify-center text-white text-2xl">
-                        <i class="fab fa-css3-alt"></i>
+                    <h3 class="text-xl font-semibold mb-4 text-purple-600">Web Development</h3>
+                    <div class="space-y-2">
+                        <div class="skill-badge bg-orange-500 text-white px-3 py-2 rounded-full">HTML</div>
+                        <div class="skill-badge bg-blue-500 text-white px-3 py-2 rounded-full">CSS</div>
+                        <div class="skill-badge bg-green-600 text-white px-3 py-2 rounded-full">Node.js</div>
+                        <div class="skill-badge bg-gray-800 text-white px-3 py-2 rounded-full">Django</div>
+                        <div class="skill-badge bg-blue-600 text-white px-3 py-2 rounded-full">MySQL</div>
+                        <div class="skill-badge bg-purple-600 text-white px-3 py-2 rounded-full">Bootstrap</div>
                     </div>
-                    <span class="text-sm">CSS3</span>
                 </div>
                 <div class="text-center">
-                    <div class="skill-badge w-16 h-16 mx-auto mb-2 bg-yellow-500 rounded-full flex items-center justify-center text-white text-2xl">
-                        <i class="fab fa-js"></i>
+                    <h3 class="text-xl font-semibold mb-4 text-green-600">Frameworks & Libraries</h3>
+                    <div class="space-y-2">
+                        <div class="skill-badge bg-red-600 text-white px-3 py-2 rounded-full">TensorFlow</div>
+                        <div class="skill-badge bg-red-500 text-white px-3 py-2 rounded-full">Keras</div>
+                        <div class="skill-badge bg-yellow-500 text-white px-3 py-2 rounded-full">TensorFlow.js</div>
                     </div>
-                    <span class="text-sm">JavaScript</span>
                 </div>
                 <div class="text-center">
-                    <div class="skill-badge w-16 h-16 mx-auto mb-2 bg-blue-600 rounded-full flex items-center justify-center text-white text-2xl">
-                        <i class="fab fa-python"></i>
+                    <h3 class="text-xl font-semibold mb-4 text-red-600">Concepts & Tools</h3>
+                    <div class="space-y-2">
+                        <div class="skill-badge bg-pink-600 text-white px-3 py-2 rounded-full">Machine Learning</div>
+                        <div class="skill-badge bg-indigo-600 text-white px-3 py-2 rounded-full">Computer Vision</div>
+                        <div class="skill-badge bg-indigo-600 text-white px-3 py-2 rounded-full">Github</div>
                     </div>
-                    <span class="text-sm">Python</span>
-                </div>
-                <div class="text-center">
-                    <div class="skill-badge w-16 h-16 mx-auto mb-2 bg-green-600 rounded-full flex items-center justify-center text-white text-2xl">
-                        <i class="fab fa-node-js"></i>
-                    </div>
-                    <span class="text-sm">Node.js</span>
-                </div>
-                <div class="text-center">
-                    <div class="skill-badge w-16 h-16 mx-auto mb-2 bg-cyan-600 rounded-full flex items-center justify-center text-white text-2xl">
-                        <i class="fab fa-react"></i>
-                    </div>
-                    <span class="text-sm">React</span>
-                </div>
-                <div class="text-center">
-                    <div class="skill-badge w-16 h-16 mx-auto mb-2 bg-gray-800 rounded-full flex items-center justify-center text-white text-2xl">
-                        <i class="fab fa-github"></i>
-                    </div>
-                    <span class="text-sm">Git</span>
-                </div>
-                <div class="text-center">
-                    <div class="skill-badge w-16 h-16 mx-auto mb-2 bg-indigo-600 rounded-full flex items-center justify-center text-white text-2xl">
-                        <i class="fas fa-database"></i>
-                    </div>
-                    <span class="text-sm">MySQL</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Blog Section -->
-    <section id="blog" class="py-20">
+    <!-- Certifications Section -->
+    <section id="certifications" class="py-20 bg-gray-50 dark:bg-gray-900">
         <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center mb-16">Latest Articles</h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <article class="blog-card glass p-6 rounded-2xl">
-                    <div class="h-40 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg mb-4"></div>
-                    <h3 class="text-xl font-semibold mb-2">Getting Started with Blockchain Development</h3>
-                    <p class="text-gray-600 dark:text-gray-400 mb-4">A comprehensive guide to building your first decentralized application...</p>
-                    <div class="flex justify-between items-center">
-                        <span class="text-sm text-gray-500">Dec 15, 2024</span>
-                        <a href="#" class="text-indigo-600 hover:text-indigo-700">Read More</a>
+            <h2 class="text-4xl font-bold text-center mb-16">Certifications</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="glass p-6 rounded-2xl text-center transform hover:scale-105 transition-transform">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-blue-600 rounded-full flex items-center justify-center">
+                        <i class="fab fa-python text-2xl text-white"></i>
                     </div>
-                </article>
+                    <h3 class="text-xl font-semibold mb-2">Python Essentials 1</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">Cisco Networking Academy</p>
+                    <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded text-sm">April 2025</span>
+                </div>
                 
-                <article class="blog-card glass p-6 rounded-2xl">
-                    <div class="h-40 bg-gradient-to-br from-green-500 to-teal-600 rounded-lg mb-4"></div>
-                    <h3 class="text-xl font-semibold mb-2">Machine Learning in Web Applications</h3>
-                    <p class="text-gray-600 dark:text-gray-400 mb-4">How to integrate TensorFlow.js into your web projects for real-time AI...</p>
-                    <div class="flex justify-between items-center">
-                        <span class="text-sm text-gray-500">Nov 28, 2024</span>
-                        <a href="#" class="text-indigo-600 hover:text-indigo-700">Read More</a>
+                <div class="glass p-6 rounded-2xl text-center transform hover:scale-105 transition-transform">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-blue-500 rounded-full flex items-center justify-center">
+                        <i class="fas fa-chart-bar text-2xl text-white"></i>
                     </div>
-                </article>
+                    <h3 class="text-xl font-semibold mb-2">Python 101 for Data Science</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">IBM SkillsBuild</p>
+                    <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded text-sm">December 2024</span>
+                </div>
                 
-                <article class="blog-card glass p-6 rounded-2xl">
-                    <div class="h-40 bg-gradient-to-br from-pink-500 to-red-600 rounded-lg mb-4"></div>
-                    <h3 class="text-xl font-semibold mb-2">Building Scalable Node.js Applications</h3>
-                    <p class="text-gray-600 dark:text-gray-400 mb-4">Best practices for creating maintainable and scalable backend services...</p>
-                    <div class="flex justify-between items-center">
-                        <span class="text-sm text-gray-500">Nov 15, 2024</span>
-                        <a href="#" class="text-indigo-600 hover:text-indigo-700">Read More</a>
+                <div class="glass p-6 rounded-2xl text-center transform hover:scale-105 transition-transform">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-purple-600 rounded-full flex items-center justify-center">
+                        <i class="fas fa-robot text-2xl text-white"></i>
                     </div>
-                </article>
+                    <h3 class="text-xl font-semibold mb-2">Getting Started with AI</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">IBM via Credly</p>
+                    <span class="bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 px-3 py-1 rounded text-sm">September 2024</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hackathons Section -->
+    <section class="py-20">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-16">Hackathons & Competitions</h2>
+            <div class="max-w-4xl mx-auto">
+                <div class="glass p-8 rounded-2xl">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-yellow-600 rounded-full flex items-center justify-center text-white">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-semibold mb-2">Salesforce & 1M1B Sustainability Hackathon</h3>
+                            <p class="text-gray-600 dark:text-gray-400 mb-4">October 2024</p>
+                            <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+                                <li class="flex items-start space-x-2">
+                                    <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                                    <span>Proposed an AI-driven autonomous boat for river and ocean cleanup using machine learning</span>
+                                </li>
+                                <li class="flex items-start space-x-2">
+                                    <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                                    <span>Presented solution via PPT at Suit Up Global event in Hyderabad</span>
+                                </li>
+                                <li class="flex items-start space-x-2">
+                                    <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                                    <span>Collaborated with diverse teams to refine solutions and incorporated judge feedback to enhance project impact</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -486,16 +574,16 @@
                 <div>
                     <h3 class="text-2xl font-semibold mb-6">Get in Touch</h3>
                     <p class="text-gray-600 dark:text-gray-400 mb-8">
-                        I'm always open to discussing new opportunities, innovative projects, or just having a chat about technology.
+                        I'm always open to discussing new opportunities, innovative projects, internships, or just having a chat about technology and AI/ML.
                     </p>
                     <div class="space-y-4">
                         <div class="flex items-center space-x-4">
                             <i class="fas fa-envelope text-indigo-600 w-6"></i>
-                            <span>rohithvuppula@email.com</span>
+                            <a href="mailto:rohithvuppula@gmail.com" class="hover:text-indigo-600 transition-colors">rohithvuppula@gmail.com</a>
                         </div>
                         <div class="flex items-center space-x-4">
                             <i class="fas fa-phone text-indigo-600 w-6"></i>
-                            <span>+91 832818045</span>
+                            <a href="tel:+918328186045" class="hover:text-indigo-600 transition-colors">+91-8328186045</a>
                         </div>
                         <div class="flex items-center space-x-4">
                             <i class="fas fa-map-marker-alt text-indigo-600 w-6"></i>
@@ -503,45 +591,46 @@
                         </div>
                     </div>
                     <div class="flex space-x-4 mt-8">
-                        <a href="https://github.com/rohith1246" target="_blank" class="w-12 h-12 bg-gray-800 hover:bg-gray-700 text-white rounded-full flex items-center justify-center transition-colors">
+                        <a href="https://github.com/rohith1246" target="_blank" class="w-12 h-12 bg-gray-800 hover:bg-gray-700 text-white rounded-full flex items-center justify-center transition-colors transform hover:scale-110">
                             <i class="fab fa-github"></i>
                         </a>
-                        <a href="https://www.linkedin.com/in/rohith-vuppula-599b16290/" target="_blank" class="w-12 h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-full flex items-center justify-center transition-colors">
+                        <a href="https://www.linkedin.com/in/rohith-vuppula-599b16290/" target="_blank" class="w-12 h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-full flex items-center justify-center transition-colors transform hover:scale-110">
                             <i class="fab fa-linkedin"></i>
                         </a>
-                        <a href="https://www.credly.com/users/rohith-vuppula.05a8fd6f" target="_blank" class="w-12 h-12 bg-orange-600 hover:bg-orange-700 text-white rounded-full flex items-center justify-center transition-colors">
+                        <a href="https://www.credly.com/users/rohith-vuppula.05a8fd6f" target="_blank" class="w-12 h-12 bg-orange-600 hover:bg-orange-700 text-white rounded-full flex items-center justify-center transition-colors transform hover:scale-110">
                             <i class="fas fa-certificate"></i>
                         </a>
                     </div>
                 </div>
-                <form class="glass p-8 rounded-2xl" onsubmit="sendMessage(event)">
+                <div class="glass p-8 rounded-2xl" id="contact-form">
                     <div class="grid md:grid-cols-2 gap-4 mb-4">
-                        <input type="text" placeholder="Your Name" class="w-full p-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-600" required>
-                        <input type="email" placeholder="Your Email" class="w-full p-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-600" required>
+                        <input type="text" name="name" placeholder="Your Name" class="w-full p-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-600" required>
+                        <input type="email" name="email" placeholder="Your Email" class="w-full p-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-600" required>
                     </div>
-                    <input type="text" placeholder="Subject" class="w-full p-3 mb-4 rounded-lg bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-600" required>
-                    <textarea placeholder="Your Message" rows="4" class="w-full p-3 mb-4 rounded-lg bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-600" required></textarea>
-                    <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-lg transition-colors transform hover:scale-105">
+                    <input type="text" name="subject" placeholder="Subject" class="w-full p-3 mb-4 rounded-lg bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-600" required>
+                    <textarea name="message" placeholder="Your Message" rows="4" class="w-full p-3 mb-4 rounded-lg bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-600" required></textarea>
+                    <button onclick="sendMessage()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-lg transition-colors transform hover:scale-105">
                         <i class="fas fa-paper-plane mr-2"></i>Send Message
                     </button>
-                </form>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="py-8 text-center border-t border-gray-200 dark:border-gray-700">
-        <p>&copy; 2025 Rohith Vuppula. Crafted with ❤️ and lots of ☕</p>
+        <p>&copy; 2025 Rohith Vuppula. Built with passion for technology and innovation 🚀</p>
     </footer>
 
-    <!-- Easter Egg Modal -->
-    <div id="easter-modal" class="modal">
-        <div class="glass p-8 rounded-2xl text-center max-w-md mx-4">
-            <div class="text-6xl mb-4">🎉</div>
-            <h3 class="text-2xl font-bold mb-4">You Found It!</h3>
-            <p class="mb-4">Fun fact: I can solve a Rubik's cube in under 2 minutes and I'm obsessed with space documentaries! 🚀</p>
-            <button onclick="closeEasterEgg()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-lg">
-                Cool!
+    <!-- Project Demo Modal -->
+    <div id="project-modal" class="modal">
+        <div class="glass p-8 rounded-2xl text-center max-w-2xl mx-4">
+            <h3 class="text-2xl font-bold mb-4" id="modal-title">Project Demo</h3>
+            <div class="mb-6" id="modal-content">
+                <!-- Dynamic content will be inserted here -->
+            </div>
+            <button onclick="closeProjectModal()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-lg">
+                Close
             </button>
         </div>
     </div>
@@ -556,6 +645,12 @@
             body.classList.toggle('dark');
         }
 
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('active');
+        }
+
         // Smooth Scrolling
         function scrollToSection(sectionId) {
             document.getElementById(sectionId).scrollIntoView({
@@ -563,34 +658,152 @@
             });
         }
 
-        // Mobile Menu Toggle
-        function toggleMobileMenu() {
-            // Implementation for mobile menu
-            console.log('Mobile menu toggle');
-        }
-
         // Resume Download
         function downloadResume() {
-            const link = document.createElement('a');
-            link.href = 'data:text/plain;charset=utf-8,Rohith Vuppula - Full Stack Developer Resume\n\nContact: +91 832818045\nLinkedIn: linkedin.com/in/rohith-vuppula-599b16290/\nGitHub: github.com/rohith1246\n\nEducation:\nB.Tech Computer Science - Balaji Institute of Technology & Science\n\nSkills:\n- Web Development: HTML, CSS, JavaScript, Python, Django, Node.js\n- Blockchain: Solidity, Web3.js\n- Machine Learning: TensorFlow.js\n- Database: MySQL\n\nProjects:\n1. Alumni Networking Platform\n2. Blockchain Land Registry System\n3. Real-time Image Classification\n\nInternships:\n- AI/ML Intern at Ncyopson\n- Blockchain Intern at VOIS';
-            link.download = 'Rohith_Vuppula_Resume.txt';
-            link.click();
+            window.open('https://drive.google.com/file/d/1-6fBYINQ3HvXLh0pzrKMI1WPEKMbY0Oq/view?usp=drivesdk', '_blank');
         }
 
         // Contact Form
-        function sendMessage(event) {
-            event.preventDefault();
-            alert('Thank you for your message! I\'ll get back to you soon.');
-            event.target.reset();
+        let messages = [];
+
+        function sendMessage() {
+            const form = document.getElementById('contact-form');
+            const name = form.querySelector('input[name="name"]').value;
+            const email = form.querySelector('input[name="email"]').value;
+            const subject = form.querySelector('input[name="subject"]').value;
+            const message = form.querySelector('textarea[name="message"]').value;
+
+            if (name && email && subject && message) {
+                // Store message in array (simulated storage)
+                messages.push({ name, email, subject, message, timestamp: new Date().toISOString() });
+                
+                // Show confirmation
+                alert(`Thank you ${name}! Your message about "${subject}" has been received. I'll get back to you at ${email} soon.`);
+                
+                // Reset form
+                form.querySelectorAll('input, textarea').forEach(input => input.value = '');
+                
+                // Log messages to console (for demo purposes; replace with actual backend storage)
+                console.log('Collected messages:', messages);
+            } else {
+                alert('Please fill in all fields.');
+            }
         }
 
-        // Easter Egg
-        function showEasterEgg() {
-            document.getElementById('easter-modal').classList.add('show');
+        // Project Demo Modal
+        function showProjectDemo(projectType) {
+            const modal = document.getElementById('project-modal');
+            const title = document.getElementById('modal-title');
+            const content = document.getElementById('modal-content');
+            
+            const projectData = {
+                'image-classification': {
+                    title: 'Image Classification Model Demo',
+                    content: `
+                        <div class="text-left">
+                            <h4 class="font-semibold mb-2">Project Overview:</h4>
+                            <p class="mb-4">Built using MobileNetV2 to categorize house rooms with 90% validation accuracy.</p>
+                            
+                            <h4 class="font-semibold mb-2">Key Features:</h4>
+                            <ul class="list-disc list-inside mb-4 space-y-1">
+                                <li>Data augmentation using ImageDataGenerator</li>
+                                <li>Transfer learning with MobileNetV2</li>
+                                <li>90% validation accuracy achieved</li>
+                                <li>Preprocessing and fine-tuning implementation</li>
+                            </ul>
+                            
+                            <h4 class="font-semibold mb-2">Technologies:</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">Python</span>
+                                <span class="bg-red-100 text-red-800 px-2 py-1 rounded text-xs">TensorFlow</span>
+                                <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">Keras</span>
+                                <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded text-xs">MobileNetV2</span>
+                            </div>
+                        </div>
+                    `
+                },
+                'alumni-platform': {
+                    title: 'Alumni Networking Platform Demo',
+                    content: `
+                        <div class="text-left">
+                            <h4 class="font-semibold mb-2">Project Overview:</h4>
+                            <p class="mb-4">Full-stack platform connecting students with alumni for mentorship and opportunities.</p>
+                            
+                            <h4 class="font-semibold mb-2">Key Features:</h4>
+                            <ul class="list-disc list-inside mb-4 space-y-1">
+                                <li>User profiles with validation and auto-resized images</li>
+                                <li>Job/event modules with search functionality</li>
+                                <li>Real-time messaging using Django Channels</li>
+                                <li>Connection system between students and alumni</li>
+                            </ul>
+                            
+                            <h4 class="font-semibold mb-2">Technologies:</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">Django</span>
+                                <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">PostgreSQL</span>
+                                <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded text-xs">Bootstrap</span>
+                                <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs">WebSocket</span>
+                            </div>
+                        </div>
+                    `
+                },
+                'marks-system': {
+                    title: 'Internal Marks Management System Demo',
+                    content: `
+                        <div class="text-left">
+                            <h4 class="font-semibold mb-2">Project Overview:</h4>
+                            <p class="mb-4">Web-based platform automating internal marks management with secure authentication.</p>
+                            
+                            <h4 class="font-semibold mb-2">Key Features:</h4>
+                            <ul class="list-disc list-inside mb-4 space-y-1">
+                                <li>Role-based access control (RBAC)</li>
+                                <li>Secure JWT authentication</li>
+                                <li>Real-time dashboards</li>
+                                <li>CSV/Excel export functionality</li>
+                                <li>Email notifications</li>
+                            </ul>
+                            
+                            <h4 class="font-semibold mb-2">Technologies:</h4>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">Node.js</span>
+                                <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs">Express.js</span>
+                                <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">MySQL</span>
+                                <span class="bg-orange-100 text-orange-800 px-2 py-1 rounded text-xs">JWT</span>
+                            </div>
+                        </div>
+                    `
+                }
+            };
+            
+            title.textContent = projectData[projectType].title;
+            content.innerHTML = projectData[projectType].content;
+            modal.classList.add('show');
         }
 
-        function closeEasterEgg() {
-            document.getElementById('easter-modal').classList.remove('show');
+        function closeProjectModal() {
+            document.getElementById('project-modal').classList.remove('show');
+        }
+
+        // Animated Counter
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-counter');
+            counters.forEach(counter => {
+                const target = parseFloat(counter.getAttribute('data-target'));
+                const increment = target / 100;
+                let current = 0;
+                
+                const updateCounter = () => {
+                    if (current < target) {
+                        current += increment;
+                        counter.textContent = current.toFixed(target % 1 === 0 ? 0 : 2);
+                        setTimeout(updateCounter, 20);
+                    } else {
+                        counter.textContent = target.toFixed(target % 1 === 0 ? 0 : 2);
+                    }
+                };
+                
+                updateCounter();
+            });
         }
 
         // Particles Animation
@@ -613,64 +826,22 @@
             }
         }
 
-        // Tech Universe Animation
-        function createTechUniverse() {
-            const universe = document.getElementById('tech-universe');
-            const technologies = [
-                { name: 'HTML', color: '#e34c26', icon: 'fab fa-html5' },
-                { name: 'CSS', color: '#1572b6', icon: 'fab fa-css3-alt' },
-                { name: 'JS', color: '#f7df1e', icon: 'fab fa-js' },
-                { name: 'Python', color: '#3776ab', icon: 'fab fa-python' },
-                { name: 'Node', color: '#339933', icon: 'fab fa-node-js' },
-                { name: 'React', color: '#61dafb', icon: 'fab fa-react' }
-            ];
-
-            technologies.forEach((tech, index) => {
-                const orbit = document.createElement('div');
-                orbit.className = 'tech-orbit';
-                orbit.style.cssText = `
-                    width: ${150 + index * 40}px;
-                    height: ${150 + index * 40}px;
-                    left: 50%;
-                    top: 50%;
-                    transform: translate(-50%, -50%);
-                    animation-delay: ${index * 0.5}s;
-                `;
-
-                const techIcon = document.createElement('div');
-                techIcon.style.cssText = `
-                    position: absolute;
-                    width: 40px;
-                    height: 40px;
-                    background: ${tech.color};
-                    border-radius: 50%;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    color: white;
-                    font-size: 16px;
-                    top: -20px;
-                    left: -20px;
-                    animation: rotate ${20 + index * 5}s linear infinite reverse;
-                `;
-                techIcon.innerHTML = `<i class="${tech.icon}"></i>`;
-
-                orbit.appendChild(techIcon);
-                universe.appendChild(orbit);
-            });
-        }
-
         // Intersection Observer for Animations
         function setupAnimations() {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('animate');
+                        
+                        // Trigger counter animation when about section is visible
+                        if (entry.target.id === 'about') {
+                            setTimeout(animateCounters, 500);
+                        }
                     }
                 });
             }, { threshold: 0.1 });
 
-            document.querySelectorAll('.timeline-item').forEach(item => {
+            document.querySelectorAll('.timeline-item, #about').forEach(item => {
                 observer.observe(item);
             });
         }
@@ -705,25 +876,12 @@
             });
         });
 
-        // GSAP Animations (if available)
-        if (typeof gsap !== 'undefined') {
-            gsap.from('.floating', { duration: 2, y: 50, opacity: 0, ease: 'bounce.out' });
-            gsap.from('.project-card', { 
-                duration: 1.5, 
-                y: 100, 
-                opacity: 0, 
-                stagger: 0.2,
-                scrollTrigger: '#projects'
-            });
-        }
-
         // Initialize everything when DOM is loaded
         document.addEventListener('DOMContentLoaded', function() {
             createParticles();
-            createTechUniverse();
             setupAnimations();
             
-            // Add some interactive hover effects
+            // Add hover effects to skill badges
             document.querySelectorAll('.skill-badge').forEach(badge => {
                 badge.addEventListener('mouseenter', function() {
                     this.style.transform = 'scale(1.1) rotateZ(5deg)';
@@ -740,37 +898,25 @@
                     typewriter.style.borderRight = 'none';
                 }
             }, 4000);
+
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', (e) => {
+                const mobileMenu = document.getElementById('mobileMenu');
+                const menuButton = document.querySelector('[onclick="toggleMobileMenu()"]');
+                
+                if (!mobileMenu.contains(e.target) && !menuButton.contains(e.target)) {
+                    mobileMenu.classList.remove('active');
+                }
+            });
         });
 
-        // Add some sparkle effects on scroll
-        let sparkleTimeout;
-        window.addEventListener('scroll', () => {
-            clearTimeout(sparkleTimeout);
-            sparkleTimeout = setTimeout(() => {
-                const sparkle = document.createElement('div');
-                sparkle.innerHTML = '✨';
-                sparkle.style.cssText = `
-                    position: fixed;
-                    left: ${Math.random() * window.innerWidth}px;
-                    top: ${Math.random() * window.innerHeight}px;
-                    pointer-events: none;
-                    z-index: 1000;
-                    animation: sparkleFloat 2s ease-out forwards;
-                `;
-                document.body.appendChild(sparkle);
-                setTimeout(() => sparkle.remove(), 2000);
-            }, 100);
-        });
-
-        // Add sparkle animation keyframes
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes sparkleFloat {
-                0% { opacity: 1; transform: translateY(0) scale(1); }
-                100% { opacity: 0; transform: translateY(-100px) scale(0); }
+        // Close modal when clicking outside
+        document.addEventListener('click', (e) => {
+            const modal = document.getElementById('project-modal');
+            if (e.target === modal) {
+                closeProjectModal();
             }
-        `;
-        document.head.appendChild(style);
+        });
     </script>
 </body>
 </html>
