@@ -10,50 +10,44 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
-            --primary: #6366f1;
-            --secondary: #8b5cf6;
+            --primary: #4f46e5; 
+            --secondary: #7c3aed; 
             --accent: #f59e0b;
-            --dark: #0f172a;
-            --light: #f8fafc;
+            --light-bg: #f8fafc;
+            --light-text: #1e293b;
+            --light-secondary: #6b7280;
         }
         
         [data-theme="dark"] {
-            --bg-primary: #0f172a;
-            --bg-secondary: #1e293b;
-            --text-primary: #f8fafc;
-            --text-secondary: #cbd5e1;
+            --bg-primary: #1e293b;
+            --bg-secondary: #334155;
+            --text-primary: #f1f5f9;
+            --text-secondary: #d1d5db;
         }
         
         [data-theme="light"] {
             --bg-primary: #ffffff;
             --bg-secondary: #f8fafc;
-            --text-primary: #0f172a;
-            --text-secondary: #64748b;
+            --text-primary: #1e293b;
+            --text-secondary: #6b7280;
         }
         
         body {
-            background-color: var(--bg-primary);
-            color: var(--text-primary);
+            background-color: var(--light-bg);
+            color: var(--light-text);
             transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
         }
         
         .hero-gradient {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
-        
-        .dark .hero-gradient {
-            background: linear-gradient(135deg, #1a202c 0%, #2d3748 50%, #4a5568 100%);
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
         }
         
         .glass {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        
-        .dark .glass {
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
         }
         
         .floating {
@@ -66,7 +60,7 @@
         }
         
         .glow {
-            box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
         }
         
         .skill-badge {
@@ -76,7 +70,7 @@
         
         .skill-badge:hover {
             transform: scale(1.1) rotateZ(5deg);
-            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
         }
         
         .project-card {
@@ -107,11 +101,7 @@
         
         .nav-blur {
             backdrop-filter: blur(20px);
-            background: rgba(255, 255, 255, 0.8);
-        }
-        
-        .dark .nav-blur {
-            background: rgba(15, 23, 42, 0.8);
+            background: rgba(255, 255, 255, 0.9);
         }
         
         .timeline-item {
@@ -132,7 +122,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.75);
             z-index: 1000;
             backdrop-filter: blur(5px);
         }
@@ -145,7 +135,7 @@
         
         .progress-bar {
             height: 8px;
-            background: rgba(99, 102, 241, 0.2);
+            background: rgba(99, 102, 241, 0.25);
             border-radius: 4px;
             overflow: hidden;
             margin-top: 8px;
@@ -165,8 +155,8 @@
         }
         
         .achievement-badge {
-            background: linear-gradient(135deg, #fbbf24, #f59e0b);
-            color: white;
+            background: linear-gradient(135deg, #facc15, #f59e0b);
+            color: #1f2937;
             padding: 4px 12px;
             border-radius: 20px;
             font-size: 0.75rem;
@@ -187,27 +177,202 @@
         .mobile-menu.active {
             transform: translateX(0);
         }
+
+        /* Enhanced certification card styles */
+        .cert-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.8));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(221, 221, 221, 0.6);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            color: var(--light-text);
+        }
+
+        .cert-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cert-card:hover::before {
+            left: 100%;
+        }
+
+        .cert-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(99, 102, 241, 0.4);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
+        }
+
+        .cert-icon {
+            width: 4rem;
+            height: 4rem;
+            margin: 0 auto 1.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #ffffff;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cert-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--light-text);
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cert-issuer {
+            color: var(--light-secondary);
+            margin-bottom: 1rem;
+            font-weight: 500;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cert-issuer a {
+            color: #6366f1;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .cert-issuer a:hover {
+            color: #8b5cf6;
+        }
+
+        .cert-date {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #ffffff;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cert-verified {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: #ffffff;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            z-index: 2;
+        }
+        
+        /* New color scheme elements */
+        .section-title {
+            position: relative;
+            padding-bottom: 1rem;
+            margin-bottom: 2.5rem;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #6366f1, #8b5cf6);
+            border-radius: 2px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(90deg, #6366f1, #8b5cf6);
+            color: white;
+            border: none;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: #6366f1;
+            border: 2px solid #6366f1;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(99, 102, 241, 0.1);
+            transform: translateY(-3px);
+        }
+        
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-5px);
+        }
+        
+        .tech-badge {
+            background: rgba(99, 102, 241, 0.1);
+            color: #6366f1;
+            border-radius: 20px;
+            padding: 0.5rem 1.25rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .tech-badge:hover {
+            background: rgba(99, 102, 241, 0.2);
+            transform: translateY(-3px);
+        }
     </style>
 </head>
-<body data-theme="dark" class="dark">
+<body data-theme="light">
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 nav-blur transition-all duration-300" id="navbar">
+    <nav class="fixed top-0 w-full z-50 nav-blur transition-all duration-300 shadow-sm" id="navbar">
         <div class="container mx-auto px-6 py-4">
             <div class="flex justify-between items-center">
                 <div class="text-2xl font-bold text-indigo-600">RV</div>
                 <div class="hidden md:flex space-x-8">
-                    <a href="#home" class="nav-link hover:text-indigo-600 transition-colors">Home</a>
-                    <a href="#about" class="nav-link hover:text-indigo-600 transition-colors">About</a>
-                    <a href="#projects" class="nav-link hover:text-indigo-600 transition-colors">Projects</a>
-                    <a href="#experience" class="nav-link hover:text-indigo-600 transition-colors">Experience</a>
-                    <a href="#tech-stack" class="nav-link hover:text-indigo-600 transition-colors">Skills</a>
-                    <a href="#certifications" class="nav-link hover:text-indigo-600 transition-colors">Certifications</a>
-                    <a href="#contact" class="nav-link hover:text-indigo-600 transition-colors">Contact</a>
+                    <a href="#home" class="nav-link hover:text-indigo-600 transition-colors font-medium">Home</a>
+                    <a href="#about" class="nav-link hover:text-indigo-600 transition-colors font-medium">About</a>
+                    <a href="#projects" class="nav-link hover:text-indigo-600 transition-colors font-medium">Projects</a>
+                    <a href="#experience" class="nav-link hover:text-indigo-600 transition-colors font-medium">Experience</a>
+                    <a href="#tech-stack" class="nav-link hover:text-indigo-600 transition-colors font-medium">Skills</a>
+                    <a href="#certifications" class="nav-link hover:text-indigo-600 transition-colors font-medium">Certifications</a>
+                    <a href="#contact" class="nav-link hover:text-indigo-600 transition-colors font-medium">Contact</a>
                 </div>
                 <div class="flex items-center space-x-4">
-                    <button onclick="toggleTheme()" class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
-                        <i class="fas fa-moon dark:hidden"></i>
-                        <i class="fas fa-sun hidden dark:inline"></i>
+                    <button onclick="toggleTheme()" class="p-2 rounded-full hover:bg-gray-200 transition-colors">
+                        <i class="fas fa-moon"></i>
                     </button>
                     <button class="md:hidden" onclick="toggleMobileMenu()">
                         <i class="fas fa-bars"></i>
@@ -217,7 +382,7 @@
         </div>
         
         <!-- Mobile Menu -->
-        <div class="mobile-menu md:hidden fixed top-0 left-0 w-64 h-full bg-white dark:bg-gray-900 shadow-lg z-40" id="mobileMenu">
+        <div class="mobile-menu md:hidden fixed top-0 left-0 w-64 h-full bg-white shadow-lg z-40" id="mobileMenu">
             <div class="p-6">
                 <div class="flex justify-between items-center mb-8">
                     <div class="text-2xl font-bold text-indigo-600">RV</div>
@@ -226,57 +391,60 @@
                     </button>
                 </div>
                 <div class="space-y-4">
-                    <a href="#home" class="block py-2 hover:text-indigo-600 transition-colors" onclick="toggleMobileMenu()">Home</a>
-                    <a href="#about" class="block py-2 hover:text-indigo-600 transition-colors" onclick="toggleMobileMenu()">About</a>
-                    <a href="#projects" class="block py-2 hover:text-indigo-600 transition-colors" onclick="toggleMobileMenu()">Projects</a>
-                    <a href="#experience" class="block py-2 hover:text-indigo-600 transition-colors" onclick="toggleMobileMenu()">Experience</a>
-                    <a href="#tech-stack" class="block py-2 hover:text-indigo-600 transition-colors" onclick="toggleMobileMenu()">Skills</a>
-                    <a href="#certifications" class="block py-2 hover:text-indigo-600 transition-colors" onclick="toggleMobileMenu()">Certifications</a>
-                    <a href="#contact" class="block py-2 hover:text-indigo-600 transition-colors" onclick="toggleMobileMenu()">Contact</a>
+                    <a href="#home" class="block py-2 hover:text-indigo-600 transition-colors font-medium" onclick="toggleMobileMenu()">Home</a>
+                    <a href="#about" class="block py-2 hover:text-indigo-600 transition-colors font-medium" onclick="toggleMobileMenu()">About</a>
+                    <a href="#projects" class="block py-2 hover:text-indigo-600 transition-colors font-medium" onclick="toggleMobileMenu()">Projects</a>
+                    <a href="#experience" class="block py-2 hover:text-indigo-600 transition-colors font-medium" onclick="toggleMobileMenu()">Experience</a>
+                    <a href="#tech-stack" class="block py-2 hover:text-indigo-600 transition-colors font-medium" onclick="toggleMobileMenu()">Skills</a>
+                    <a href="#certifications" class="block py-2 hover:text-indigo-600 transition-colors font-medium" onclick="toggleMobileMenu()">Certifications</a>
+                    <a href="#contact" class="block py-2 hover:text-indigo-600 transition-colors font-medium" onclick="toggleMobileMenu()">Contact</a>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="min-h-screen flex items-center justify-center hero-gradient relative overflow-hidden">
-        <div class="absolute inset-0" id="particles"></div>
-        <div class="container mx-auto px-6 text-center relative z-10">
-            <div class="floating">
-                <img src="pic.jpeg" alt="Rohith Vuppula" class="w-32 h-32 mx-auto mb-8 rounded-full border-4 border-white relative">
-                <div class="achievement-badge absolute -top-2 -right-2">New!</div>
-            </div>
-            <h1 class="text-5xl md:text-7xl font-bold mb-6 text-white">
-                <span class="typewriter">Rohith Vuppula</span>
-            </h1>
-            <p class="text-xl md:text-2xl mb-8 text-gray-200">
-                Final-year Software Engineering Student • AI/ML Enthusiast • Full-Stack Developer
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <button onclick="scrollToSection('projects')" class="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-3 rounded-full transition-all transform hover:scale-105 glow">
-                    View My Work
-                </button>
-                <button onclick="downloadResume()" class="glass text-white px-8 py-3 rounded-full transition-all transform hover:scale-105">
-                    <i class="fas fa-download mr-2"></i>Download Resume
-                </button>
-            </div>
+  <!-- Hero Section -->
+<section id="home" class="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-600 to-purple-600 relative overflow-hidden">
+    <div class="absolute inset-0" id="particles"></div>
+    <div class="container mx-auto px-6 text-center relative z-10">
+        <div class="floating">
+            <img src="pic.jpeg" 
+                 alt="Rohith Vuppula" 
+                 class="w-48 h-48 mx-auto mb-8 rounded-full border-4 border-white object-cover shadow-xl">
+            <div class="achievement-badge absolute -top-2 -right-2">New!</div>
         </div>
-    </section>
-
-    <!-- About Section with Enhanced Stats -->
-    <section id="about" class="py-20 bg-gray-50 dark:bg-gray-900">
+        <h1 class="text-5xl md:text-7xl font-bold mb-6 text-white">
+            Rohith Vuppula
+        </h1>
+        <p class="text-xl md:text-2xl mb-8 text-gray-100 font-medium">
+            Final-year Software Engineering Student • AI/ML Enthusiast • Full-Stack Developer
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <button onclick="scrollToSection('projects')" 
+                    class="bg-white hover:bg-gray-100 text-indigo-600 px-8 py-3 rounded-full font-medium transition-all transform hover:scale-105 shadow-lg">
+                View My Work
+            </button>
+            <button onclick="downloadResume()" 
+                    class="bg-transparent hover:bg-white/10 text-white border-2 border-white px-8 py-3 rounded-full font-medium transition-all transform hover:scale-105">
+                <i class="fas fa-download mr-2"></i>Download Resume
+            </button>
+        </div>
+    </div>
+</section>
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
         <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center mb-16">About Me</h2>
+            <h2 class="text-4xl font-bold text-center mb-16 text-gray-900 section-title">About Me</h2>
             <div class="grid lg:grid-cols-2 gap-12 items-center">
                 <div>
-                    <h3 class="text-2xl font-semibold mb-6">My Journey</h3>
+                    <h3 class="text-2xl font-semibold mb-6 text-gray-900">My Journey</h3>
                     <div class="space-y-6">
                         <div class="timeline-item">
                             <div class="flex items-center space-x-4">
                                 <div class="w-4 h-4 bg-indigo-600 rounded-full"></div>
                                 <div>
-                                    <h4 class="font-semibold">B.Tech Software Engineering (2022-Present)</h4>
-                                    <p class="text-gray-600 dark:text-gray-400">Balaji Institute of Tech & Science, Warangal - CGPA: 7.75</p>
+                                    <h4 class="font-semibold text-gray-900">B.Tech Software Engineering (2022-Present)</h4>
+                                    <p class="text-gray-600">Balaji Institute of Tech & Science, Warangal - CGPA: 7.75</p>
                                 </div>
                             </div>
                         </div>
@@ -284,52 +452,52 @@
                             <div class="flex items-center space-x-4">
                                 <div class="w-4 h-4 bg-purple-600 rounded-full"></div>
                                 <div>
-                                    <h4 class="font-semibold">AI-ML Intern (Jan 2025 - June 2025)</h4>
-                                    <p class="text-gray-600 dark:text-gray-400">Nextopson - Real-time Image Classification & NSFW Detection</p>
+                                    <h4 class="font-semibold text-gray-900">AI-ML Intern (Jan 2025 - June 2025)</h4>
+                                    <p class="text-gray-600">Nextopson - Real-time Image Classification & NSFW Detection</p>
                                 </div>
                             </div>
                         </div>
                         <div class="timeline-item">
                             <div class="flex items-center space-x-4">
-                                <div class="w-4 h-4 bg-yellow-600 rounded-full"></div>
+                                <div class="w-4 h-4 bg-yellow-500 rounded-full"></div>
                                 <div>
-                                    <h4 class="font-semibold">Hackathon Participant</h4>
-                                    <p class="text-gray-600 dark:text-gray-400">Salesforce & 1M1B Sustainability Hackathon (Oct 2024)</p>
+                                    <h4 class="font-semibold text-gray-900">Hackathon Participant</h4>
+                                    <p class="text-gray-600">Salesforce & 1M1B Sustainability Hackathon (Oct 2024)</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="text-center">
-                    <div class="glass p-8 rounded-2xl">
-                        <h3 class="text-xl font-semibold mb-6">Academic & Professional Stats</h3>
+                    <div class="glass p-8 rounded-2xl shadow-lg">
+                        <h3 class="text-xl font-semibold mb-6 text-gray-900">Academic & Professional Stats</h3>
                         <div class="grid grid-cols-2 gap-6">
                             <div class="text-center">
                                 <div class="stat-counter" data-target="7.75">0</div>
-                                <div class="text-sm text-gray-600 dark:text-gray-400">Current CGPA</div>
+                                <div class="text-sm text-gray-600">Current CGPA</div>
                                 <div class="progress-bar">
                                     <div class="progress-fill" style="width: 77.5%"></div>
                                 </div>
                             </div>
                             <div class="text-center">
-                                <div class="stat-counter text-purple-600" data-target="3">0</div>
-                                <div class="text-sm text-gray-600 dark:text-gray-400">Major Projects</div>
-                                <div class="progress-bar">
-                                    <div class="progress-fill" style="width: 60%"></div>
-                                </div>
-                            </div>
-                            <div class="text-center">
-                                <div class="stat-counter text-yellow-600" data-target="10">0</div>
-                                <div class="text-sm text-gray-600 dark:text-gray-400">Technologies</div>
+                                <div class="stat-counter text-purple-600" data-target="4">0</div>
+                                <div class="text-sm text-gray-600">Major Projects</div>
                                 <div class="progress-bar">
                                     <div class="progress-fill" style="width: 80%"></div>
                                 </div>
                             </div>
                             <div class="text-center">
-                                <div class="stat-counter text-green-600" data-target="3">0</div>
-                                <div class="text-sm text-gray-600 dark:text-gray-400">Certifications</div>
+                                <div class="stat-counter text-yellow-500" data-target="12">0</div>
+                                <div class="text-sm text-gray-600">Technologies</div>
                                 <div class="progress-bar">
-                                    <div class="progress-fill" style="width: 90%"></div>
+                                    <div class="progress-fill" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <div class="stat-counter text-green-500" data-target="9">0</div>
+                                <div class="text-sm text-gray-600">Certifications</div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 95%"></div>
                                 </div>
                             </div>
                         </div>
@@ -340,20 +508,20 @@
     </section>
 
     <!-- Experience Section -->
-    <section id="experience" class="py-20">
+    <section id="experience" class="py-20 bg-gray-50">
         <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center mb-16">Work Experience</h2>
+            <h2 class="text-4xl font-bold text-center mb-16 text-gray-900 section-title">Work Experience</h2>
             <div class="max-w-4xl mx-auto">
-                <div class="glass p-8 rounded-2xl">
+                <div class="glass p-8 rounded-2xl shadow-lg">
                     <div class="flex items-start space-x-4">
                         <div class="w-12 h-12 bg-indigo-600 rounded-full flex items-center justify-center text-white font-bold">
                             N
                         </div>
                         <div class="flex-1">
-                            <h3 class="text-2xl font-semibold mb-2">AI-ML Intern</h3>
+                            <h3 class="text-2xl font-semibold mb-2 text-gray-900">AI-ML Intern</h3>
                             <h4 class="text-xl text-indigo-600 mb-2">Nextopson</h4>
-                            <p class="text-gray-600 dark:text-gray-400 mb-4">January 2025 – June 2025</p>
-                            <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+                            <p class="text-gray-600 mb-4">January 2025 – June 2025</p>
+                            <ul class="space-y-2 text-gray-700">
                                 <li class="flex items-start space-x-2">
                                     <i class="fas fa-check-circle text-green-500 mt-1"></i>
                                     <span>Developed and integrated real-time image classification and NSFW detection models into the nextdealAppServer backend using TensorFlow.js</span>
@@ -375,47 +543,47 @@
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="py-20 bg-gray-50 dark:bg-gray-900">
+    <section id="projects" class="py-20 bg-white">
         <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center mb-16">Featured Projects</h2>
+            <h2 class="text-4xl font-bold text-center mb-16 text-gray-900 section-title">Featured Projects</h2>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Image Classification Model -->
-                <div class="project-card glass p-6 rounded-2xl">
+                <div class="project-card glass p-6 rounded-2xl shadow-md">
                     <div class="h-40 bg-gradient-to-br from-pink-500 to-red-600 rounded-lg mb-4 flex items-center justify-center relative">
                         <i class="fas fa-brain text-4xl text-white"></i>
                         <div class="achievement-badge absolute top-2 right-2">90% Accuracy</div>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">Image Classification Model</h3>
-                    <p class="text-gray-600 dark:text-gray-400 mb-4">Built using MobileNetV2 to categorize house rooms with 90% validation accuracy. Implemented data augmentation and preprocessing.</p>
+                    <h3 class="text-xl font-semibold mb-2 text-gray-900">Image Classification Model</h3>
+                    <p class="text-gray-600 mb-4">Built using MobileNetV2 to categorize house rooms with 90% validation accuracy. Implemented data augmentation and preprocessing.</p>
                     <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="skill-badge bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded text-xs">Python</span>
-                        <span class="skill-badge bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 px-2 py-1 rounded text-xs">TensorFlow</span>
-                        <span class="skill-badge bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 py-1 rounded text-xs">Keras</span>
-                        <span class="skill-badge bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 px-2 py-1 rounded text-xs">MobileNetV2</span>
+                        <span class="tech-badge">Python</span>
+                        <span class="tech-badge">TensorFlow</span>
+                        <span class="tech-badge">Keras</span>
+                        <span class="tech-badge">MobileNetV2</span>
                     </div>
                     <div class="flex space-x-2">
-                        <button onclick="showProjectDemo('image-classification')" class="flex-1 bg-gray-800 hover:bg-gray-700 text-white py-2 rounded transition-colors">
+                        <button onclick="window.open('https://github.com/rohith1246/Room-classification', '_blank')" class="flex-1 bg-gray-800 hover:bg-gray-700 text-white py-2 rounded transition-colors">
                             <i class="fab fa-github mr-2"></i>Code
                         </button>
-                        <button onclick="showProjectDemo('image-classification')" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded transition-colors">
+                        <button onclick="window.open('https://room-classification.vercel.app/', '_blank')" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded transition-colors">
                             <i class="fas fa-eye mr-2"></i>Demo
                         </button>
                     </div>
                 </div>
 
                 <!-- Alumni Networking Platform -->
-                <div class="project-card glass p-6 rounded-2xl">
+                <div class="project-card glass p-6 rounded-2xl shadow-md">
                     <div class="h-40 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg mb-4 flex items-center justify-center relative">
                         <i class="fas fa-users text-4xl text-white"></i>
                         <div class="achievement-badge absolute top-2 right-2">Full-Stack</div>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">Alumni Networking Platform</h3>
-                    <p class="text-gray-600 dark:text-gray-400 mb-4">Full-stack platform connecting students with alumni for mentorship. Features real-time messaging and job/event modules.</p>
+                    <h3 class="text-xl font-semibold mb-2 text-gray-900">Alumni Networking Platform</h3>
+                    <p class="text-gray-600 mb-4">Full-stack platform connecting students with alumni for mentorship. Features real-time messaging and job/event modules.</p>
                     <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="skill-badge bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 py-1 rounded text-xs">Django</span>
-                        <span class="skill-badge bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded text-xs">PostgreSQL</span>
-                        <span class="skill-badge bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 px-2 py-1 rounded text-xs">Bootstrap</span>
-                        <span class="skill-badge bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 px-2 py-1 rounded text-xs">WebSocket</span>
+                        <span class="tech-badge">Django</span>
+                        <span class="tech-badge">PostgreSQL</span>
+                        <span class="tech-badge">Bootstrap</span>
+                        <span class="tech-badge">WebSocket</span>
                     </div>
                     <div class="flex space-x-2">
                         <button onclick="window.open('https://github.com/rohith1246/alumni_networking_platform', '_blank')" class="flex-1 bg-gray-800 hover:bg-gray-700 text-white py-2 rounded transition-colors">
@@ -428,18 +596,18 @@
                 </div>
 
                 <!-- Internal Marks Management System -->
-                <div class="project-card glass p-6 rounded-2xl">
+                <div class="project-card glass p-6 rounded-2xl shadow-md">
                     <div class="h-40 bg-gradient-to-br from-green-500 to-teal-600 rounded-lg mb-4 flex items-center justify-center relative">
                         <i class="fas fa-chart-line text-4xl text-white"></i>
                         <div class="achievement-badge absolute top-2 right-2">Secure</div>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">Internal Marks Management System</h3>
-                    <p class="text-gray-600 dark:text-gray-400 mb-4">Web-based platform automating marks management with role-based access control and secure JWT authentication.</p>
+                    <h3 class="text-xl font-semibold mb-2 text-gray-900">Internal Marks Management System</h3>
+                    <p class="text-gray-600 mb-4">Web-based platform automating marks management with role-based access control and secure JWT authentication.</p>
                     <div class="flex flex-wrap gap-2 mb-4">
-                        <span class="skill-badge bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-2 py-1 rounded text-xs">Node.js</span>
-                        <span class="skill-badge bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 px-2 py-1 rounded text-xs">Express.js</span>
-                        <span class="skill-badge bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded text-xs">MySQL</span>
-                        <span class="skill-badge bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200 px-2 py-1 rounded text-xs">JWT</span>
+                        <span class="tech-badge">Node.js</span>
+                        <span class="tech-badge">Express.js</span>
+                        <span class="tech-badge">MySQL</span>
+                        <span class="tech-badge">JWT</span>
                     </div>
                     <div class="flex space-x-2">
                         <button onclick="window.open('https://github.com/rohith1246/Internal-Marks-Management-System/tree/master', '_blank')" class="flex-1 bg-gray-800 hover:bg-gray-700 text-white py-2 rounded transition-colors">
@@ -455,42 +623,45 @@
     </section>
 
     <!-- Tech Stack Section -->
-    <section id="tech-stack" class="py-20">
+    <section id="tech-stack" class="py-20 bg-gray-50">
         <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center mb-16">Technical Skills</h2>
+            <h2 class="text-4xl font-bold text-center mb-16 text-gray-900 section-title">Technical Skills</h2>
             <div class="grid md:grid-cols-4 gap-8 mb-12">
                 <div class="text-center">
                     <h3 class="text-xl font-semibold mb-4 text-indigo-600">Languages</h3>
                     <div class="space-y-2">
-                        <div class="skill-badge bg-blue-600 text-white px-3 py-2 rounded-full">Java</div>
-                        <div class="skill-badge bg-yellow-600 text-white px-3 py-2 rounded-full">Python</div>
+                        <div class="tech-badge">Java</div>
+                        <div class="tech-badge">Python</div>
+                        <div class="tech-badge">JavaScript</div>
                     </div>
                 </div>
                 <div class="text-center">
                     <h3 class="text-xl font-semibold mb-4 text-purple-600">Web Development</h3>
                     <div class="space-y-2">
-                        <div class="skill-badge bg-orange-500 text-white px-3 py-2 rounded-full">HTML</div>
-                        <div class="skill-badge bg-blue-500 text-white px-3 py-2 rounded-full">CSS</div>
-                        <div class="skill-badge bg-green-600 text-white px-3 py-2 rounded-full">Node.js</div>
-                        <div class="skill-badge bg-gray-800 text-white px-3 py-2 rounded-full">Django</div>
-                        <div class="skill-badge bg-blue-600 text-white px-3 py-2 rounded-full">MySQL</div>
-                        <div class="skill-badge bg-purple-600 text-white px-3 py-2 rounded-full">Bootstrap</div>
+                        <div class="tech-badge">HTML</div>
+                        <div class="tech-badge">CSS</div>
+                        <div class="tech-badge">Node.js</div>
+                        <div class="tech-badge">Django</div>
+                        <div class="tech-badge">MySQL</div>
+                        <div class="tech-badge">Bootstrap</div>
                     </div>
                 </div>
                 <div class="text-center">
                     <h3 class="text-xl font-semibold mb-4 text-green-600">Frameworks & Libraries</h3>
                     <div class="space-y-2">
-                        <div class="skill-badge bg-red-600 text-white px-3 py-2 rounded-full">TensorFlow</div>
-                        <div class="skill-badge bg-red-500 text-white px-3 py-2 rounded-full">Keras</div>
-                        <div class="skill-badge bg-yellow-500 text-white px-3 py-2 rounded-full">TensorFlow.js</div>
+                        <div class="tech-badge">TensorFlow</div>
+                        <div class="tech-badge">Keras</div>
+                        <div class="tech-badge">TensorFlow.js</div>
+                        <div class="tech-badge">React</div>
                     </div>
                 </div>
                 <div class="text-center">
                     <h3 class="text-xl font-semibold mb-4 text-red-600">Concepts & Tools</h3>
                     <div class="space-y-2">
-                        <div class="skill-badge bg-pink-600 text-white px-3 py-2 rounded-full">Machine Learning</div>
-                        <div class="skill-badge bg-indigo-600 text-white px-3 py-2 rounded-full">Computer Vision</div>
-                        <div class="skill-badge bg-indigo-600 text-white px-3 py-2 rounded-full">Github</div>
+                        <div class="tech-badge">Machine Learning</div>
+                        <div class="tech-badge">Computer Vision</div>
+                        <div class="tech-badge">Github</div>
+                        <div class="tech-badge">AWS</div>
                     </div>
                 </div>
             </div>
@@ -498,54 +669,118 @@
     </section>
 
     <!-- Certifications Section -->
-    <section id="certifications" class="py-20 bg-gray-50 dark:bg-gray-900">
+    <section id="certifications" class="py-20 bg-white">
         <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center mb-16">Certifications</h2>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="glass p-6 rounded-2xl text-center transform hover:scale-105 transition-transform">
-                    <div class="w-16 h-16 mx-auto mb-4 bg-blue-600 rounded-full flex items-center justify-center">
-                        <i class="fab fa-python text-2xl text-white"></i>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-2">Python Essentials 1</h3>
-                    <p class="text-gray-600 dark:text-gray-400 mb-4">Cisco Networking Academy</p>
-                    <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded text-sm">April 2025</span>
-                </div>
+            <h2 class="text-4xl font-bold text-center mb-16 text-gray-900 section-title">Professional Certifications</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 
-                <div class="glass p-6 rounded-2xl text-center transform hover:scale-105 transition-transform">
-                    <div class="w-16 h-16 mx-auto mb-4 bg-blue-500 rounded-full flex items-center justify-center">
-                        <i class="fas fa-chart-bar text-2xl text-white"></i>
+                <!-- AWS Educate Introduction to Generative AI -->
+                <a href="https://www.credly.com/earner/earned/badge/752f7e81-34b7-4024-ad10-5a4efca27517" target="_blank" class="cert-card">
+                    <div class="cert-verified">
+                        <i class="fas fa-check-circle"></i>
+                        Verified
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">Python 101 for Data Science</h3>
-                    <p class="text-gray-600 dark:text-gray-400 mb-4">IBM SkillsBuild</p>
-                    <span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded text-sm">December 2024</span>
-                </div>
+                    <div class="cert-icon bg-gradient-to-br from-orange-500 to-amber-600">
+                        <i class="fab fa-aws"></i>
+                    </div>
+                    <h3 class="cert-title">AWS Educate Introduction to Generative AI</h3>
+                    <p class="cert-issuer">Amazon Web Services Training and Certification</p>
+                    <span class="cert-date bg-gradient-to-r from-orange-500 to-amber-500">2025</span>
+                </a>
                 
-                <div class="glass p-6 rounded-2xl text-center transform hover:scale-105 transition-transform">
-                    <div class="w-16 h-16 mx-auto mb-4 bg-purple-600 rounded-full flex items-center justify-center">
-                        <i class="fas fa-robot text-2xl text-white"></i>
+                <!-- AWS Educate Machine Learning Foundations -->
+                <a href="https://www.credly.com/earner/earned/badge/0e4c7532-366c-4fb9-bae6-10424b6bf702" target="_blank" class="cert-card">
+                    <div class="cert-verified">
+                        <i class="fas fa-check-circle"></i>
+                        Verified
                     </div>
-                    <h3 class="text-xl font-semibold mb-2">Getting Started with AI</h3>
-                    <p class="text-gray-600 dark:text-gray-400 mb-4">IBM via Credly</p>
-                    <span class="bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 px-3 py-1 rounded text-sm">September 2024</span>
-                </div>
+                    <div class="cert-icon bg-gradient-to-br from-orange-600 to-orange-700">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3 class="cert-title">AWS Educate Machine Learning Foundations</h3>
+                    <p class="cert-issuer">Amazon Web Services Training and Certification</p>
+                    <span class="cert-date bg-gradient-to-r from-orange-600 to-orange-700">2025</span>
+                </a>
+                
+                
+                
+                
+                <!-- Python Essentials 1 -->
+                <a href="https://www.credly.com/earner/earned/badge/66eee27e-e987-4ca8-90e8-41062b7559b2" target="_blank" class="cert-card">
+                    <div class="cert-verified">
+                        <i class="fas fa-check-circle"></i>
+                        Verified
+                    </div>
+                    <div class="cert-icon bg-gradient-to-br from-blue-500 to-blue-700">
+                        <i class="fab fa-python"></i>
+                    </div>
+                    <h3 class="cert-title">Python Essentials 1</h3>
+                    <p class="cert-issuer">Cisco Networking Academy</p>
+                    <span class="cert-date bg-gradient-to-r from-blue-500 to-blue-700">Apr 15, 2025</span>
+                </a>
+                
+                <!-- Python 101 for Data Science -->
+                <a href="https://courses.skillsbuild.skillsnetwork.site/certificates/ab58b3d0f87a493992525cbec912887a" target="_blank" class="cert-card">
+                    <div class="cert-verified">
+                        <i class="fas fa-check-circle"></i>
+                        Verified
+                    </div>
+                    <div class="cert-icon bg-gradient-to-br from-blue-400 to-blue-600">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h3 class="cert-title">Python 101 for Data Science</h3>
+                    <p class="cert-issuer">IBM SkillsBuild</p>
+                    <span class="cert-date bg-gradient-to-r from-blue-400 to-blue-600">Dec 2024</span>
+                </a>
+                
+                <!-- Getting Started with AI -->
+                <a href="https://www.credly.com/earner/earned/badge/1a7cb66b-0353-43bf-884b-81fe407da17a" target="_blank" class="cert-card">
+                    <div class="cert-verified">
+                        <i class="fas fa-check-circle"></i>
+                        Verified
+                    </div>
+                    <div class="cert-icon bg-gradient-to-br from-purple-500 to-indigo-500">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3 class="cert-title">Getting Started with Artificial Intelligence</h3>
+                    <p class="cert-issuer">IBM via Credly</p>
+                    <span class="cert-date bg-gradient-to-r from-purple-500 to-indigo-500">Sep 2024</span>
+                </a>
+                
+                <!-- Journey to Cloud -->
+                <a href="https://www.credly.com/earner/earned/badge/56c6e494-5a95-41cd-9ddf-f3d76a66953c" target="_blank" class="cert-card">
+                    <div class="cert-verified">
+                        <i class="fas fa-check-circle"></i>
+                        Verified
+                    </div>
+                    <div class="cert-icon bg-gradient-to-br from-teal-500 to-cyan-600">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h3 class="cert-title">Journey to Cloud: Envisioning Your Solution</h3>
+                    <p class="cert-issuer">IBM via Credly</p>
+                    <span class="cert-date bg-gradient-to-r from-teal-500 to-cyan-600">2024</span>
+                </a>
+                
+               
+                
             </div>
         </div>
     </section>
 
     <!-- Hackathons Section -->
-    <section class="py-20">
+    <section class="py-20 bg-gray-50">
         <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center mb-16">Hackathons & Competitions</h2>
+            <h2 class="text-4xl font-bold text-center mb-16 text-gray-900 section-title">Hackathons & Competitions</h2>
             <div class="max-w-4xl mx-auto">
-                <div class="glass p-8 rounded-2xl">
+                <div class="glass p-8 rounded-2xl shadow-lg">
                     <div class="flex items-start space-x-4">
-                        <div class="w-12 h-12 bg-yellow-600 rounded-full flex items-center justify-center text-white">
+                        <div class="w-12 h-12 bg-yellow-500 rounded-full flex items-center justify-center text-white">
                             <i class="fas fa-trophy"></i>
                         </div>
                         <div class="flex-1">
-                            <h3 class="text-2xl font-semibold mb-2">Salesforce & 1M1B Sustainability Hackathon</h3>
-                            <p class="text-gray-600 dark:text-gray-400 mb-4">October 2024</p>
-                            <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+                            <h3 class="text-2xl font-semibold mb-2 text-gray-900">Salesforce & 1M1B Sustainability Hackathon</h3>
+                            <p class="text-gray-600 mb-4">October 2024</p>
+                            <ul class="space-y-2 text-gray-700">
                                 <li class="flex items-start space-x-2">
                                     <i class="fas fa-check-circle text-green-500 mt-1"></i>
                                     <span>Proposed an AI-driven autonomous boat for river and ocean cleanup using machine learning</span>
@@ -567,13 +802,13 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-gray-50 dark:bg-gray-900">
+    <section id="contact" class="py-20 bg-white">
         <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold text-center mb-16">Let's Connect</h2>
+            <h2 class="text-4xl font-bold text-center mb-16 text-gray-900 section-title">Let's Connect</h2>
             <div class="grid lg:grid-cols-2 gap-12">
                 <div>
-                    <h3 class="text-2xl font-semibold mb-6">Get in Touch</h3>
-                    <p class="text-gray-600 dark:text-gray-400 mb-8">
+                    <h3 class="text-2xl font-semibold mb-6 text-gray-900">Get in Touch</h3>
+                    <p class="text-gray-600 mb-8">
                         I'm always open to discussing new opportunities, innovative projects, internships, or just having a chat about technology and AI/ML.
                     </p>
                     <div class="space-y-4">
@@ -591,25 +826,25 @@
                         </div>
                     </div>
                     <div class="flex space-x-4 mt-8">
-                        <a href="https://github.com/rohith1246" target="_blank" class="w-12 h-12 bg-gray-800 hover:bg-gray-700 text-white rounded-full flex items-center justify-center transition-colors transform hover:scale-110">
+                        <a href="https://github.com/rohith1246" target="_blank" class="social-icon bg-gray-800 text-white">
                             <i class="fab fa-github"></i>
                         </a>
-                        <a href="https://www.linkedin.com/in/rohith-vuppula-599b16290/" target="_blank" class="w-12 h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-full flex items-center justify-center transition-colors transform hover:scale-110">
+                        <a href="https://www.linkedin.com/in/rohith-vuppula-599b16290/" target="_blank" class="social-icon bg-blue-600 text-white">
                             <i class="fab fa-linkedin"></i>
                         </a>
-                        <a href="https://www.credly.com/users/rohith-vuppula.05a8fd6f" target="_blank" class="w-12 h-12 bg-orange-600 hover:bg-orange-700 text-white rounded-full flex items-center justify-center transition-colors transform hover:scale-110">
+                        <a href="https://www.credly.com/users/rohith-vuppula.05a8fd6f" target="_blank" class="social-icon bg-orange-600 text-white">
                             <i class="fas fa-certificate"></i>
                         </a>
                     </div>
                 </div>
-                <div class="glass p-8 rounded-2xl" id="contact-form">
+                <div class="glass p-8 rounded-2xl shadow-md" id="contact-form">
                     <div class="grid md:grid-cols-2 gap-4 mb-4">
-                        <input type="text" name="name" placeholder="Your Name" class="w-full p-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-600" required>
-                        <input type="email" name="email" placeholder="Your Email" class="w-full p-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-600" required>
+                        <input type="text" name="name" placeholder="Your Name" class="w-full p-3 rounded-lg bg-white border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+                        <input type="email" name="email" placeholder="Your Email" class="w-full p-3 rounded-lg bg-white border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
                     </div>
-                    <input type="text" name="subject" placeholder="Subject" class="w-full p-3 mb-4 rounded-lg bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-600" required>
-                    <textarea name="message" placeholder="Your Message" rows="4" class="w-full p-3 mb-4 rounded-lg bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-600" required></textarea>
-                    <button onclick="sendMessage()" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-lg transition-colors transform hover:scale-105">
+                    <input type="text" name="subject" placeholder="Subject" class="w-full p-3 mb-4 rounded-lg bg-white border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500" required>
+                    <textarea name="message" placeholder="Your Message" rows="4" class="w-full p-3 mb-4 rounded-lg bg-white border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500" required></textarea>
+                    <button onclick="sendMessage()" class="w-full btn-primary py-3 rounded-lg">
                         <i class="fas fa-paper-plane mr-2"></i>Send Message
                     </button>
                 </div>
@@ -618,18 +853,18 @@
     </section>
 
     <!-- Footer -->
-    <footer class="py-8 text-center border-t border-gray-200 dark:border-gray-700">
-        <p>&copy; 2025 Rohith Vuppula. Built with passion for technology and innovation 🚀</p>
+    <footer class="py-8 text-center border-t border-gray-200 bg-gray-50">
+        <p class="text-gray-600">&copy; 2025 Rohith Vuppula. Built with passion for technology and innovation 🚀</p>
     </footer>
 
     <!-- Project Demo Modal -->
     <div id="project-modal" class="modal">
         <div class="glass p-8 rounded-2xl text-center max-w-2xl mx-4">
-            <h3 class="text-2xl font-bold mb-4" id="modal-title">Project Demo</h3>
-            <div class="mb-6" id="modal-content">
+            <h3 class="text-2xl font-bold mb-4 text-gray-900" id="modal-title">Project Demo</h3>
+            <div class="mb-6 text-gray-700" id="modal-content">
                 <!-- Dynamic content will be inserted here -->
             </div>
-            <button onclick="closeProjectModal()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-lg">
+            <button onclick="closeProjectModal()" class="btn-primary px-6 py-2 rounded-lg">
                 Close
             </button>
         </div>
@@ -674,16 +909,9 @@
             const message = form.querySelector('textarea[name="message"]').value;
 
             if (name && email && subject && message) {
-                // Store message in array (simulated storage)
                 messages.push({ name, email, subject, message, timestamp: new Date().toISOString() });
-                
-                // Show confirmation
                 alert(`Thank you ${name}! Your message about "${subject}" has been received. I'll get back to you at ${email} soon.`);
-                
-                // Reset form
                 form.querySelectorAll('input, textarea').forEach(input => input.value = '');
-                
-                // Log messages to console (for demo purposes; replace with actual backend storage)
                 console.log('Collected messages:', messages);
             } else {
                 alert('Please fill in all fields.');
@@ -701,23 +929,23 @@
                     title: 'Image Classification Model Demo',
                     content: `
                         <div class="text-left">
-                            <h4 class="font-semibold mb-2">Project Overview:</h4>
-                            <p class="mb-4">Built using MobileNetV2 to categorize house rooms with 90% validation accuracy.</p>
+                            <h4 class="font-semibold mb-2 text-gray-900">Project Overview:</h4>
+                            <p class="mb-4 text-gray-700">Built using MobileNetV2 to categorize house rooms with 90% validation accuracy.</p>
                             
-                            <h4 class="font-semibold mb-2">Key Features:</h4>
-                            <ul class="list-disc list-inside mb-4 space-y-1">
+                            <h4 class="font-semibold mb-2 text-gray-900">Key Features:</h4>
+                            <ul class="list-disc list-inside mb-4 space-y-1 text-gray-700">
                                 <li>Data augmentation using ImageDataGenerator</li>
                                 <li>Transfer learning with MobileNetV2</li>
                                 <li>90% validation accuracy achieved</li>
                                 <li>Preprocessing and fine-tuning implementation</li>
                             </ul>
                             
-                            <h4 class="font-semibold mb-2">Technologies:</h4>
+                            <h4 class="font-semibold mb-2 text-gray-900">Technologies:</h4>
                             <div class="flex flex-wrap gap-2">
-                                <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">Python</span>
-                                <span class="bg-red-100 text-red-800 px-2 py-1 rounded text-xs">TensorFlow</span>
-                                <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">Keras</span>
-                                <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded text-xs">MobileNetV2</span>
+                                <span class="tech-badge">Python</span>
+                                <span class="tech-badge">TensorFlow</span>
+                                <span class="tech-badge">Keras</span>
+                                <span class="tech-badge">MobileNetV2</span>
                             </div>
                         </div>
                     `
@@ -726,23 +954,23 @@
                     title: 'Alumni Networking Platform Demo',
                     content: `
                         <div class="text-left">
-                            <h4 class="font-semibold mb-2">Project Overview:</h4>
-                            <p class="mb-4">Full-stack platform connecting students with alumni for mentorship and opportunities.</p>
+                            <h4 class="font-semibold mb-2 text-gray-900">Project Overview:</h4>
+                            <p class="mb-4 text-gray-700">Full-stack platform connecting students with alumni for mentorship and opportunities.</p>
                             
-                            <h4 class="font-semibold mb-2">Key Features:</h4>
-                            <ul class="list-disc list-inside mb-4 space-y-1">
+                            <h4 class="font-semibold mb-2 text-gray-900">Key Features:</h4>
+                            <ul class="list-disc list-inside mb-4 space-y-1 text-gray-700">
                                 <li>User profiles with validation and auto-resized images</li>
                                 <li>Job/event modules with search functionality</li>
                                 <li>Real-time messaging using Django Channels</li>
                                 <li>Connection system between students and alumni</li>
                             </ul>
                             
-                            <h4 class="font-semibold mb-2">Technologies:</h4>
+                            <h4 class="font-semibold mb-2 text-gray-900">Technologies:</h4>
                             <div class="flex flex-wrap gap-2">
-                                <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">Django</span>
-                                <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">PostgreSQL</span>
-                                <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded text-xs">Bootstrap</span>
-                                <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs">WebSocket</span>
+                                <span class="tech-badge">Django</span>
+                                <span class="tech-badge">PostgreSQL</span>
+                                <span class="tech-badge">Bootstrap</span>
+                                <span class="tech-badge">WebSocket</span>
                             </div>
                         </div>
                     `
@@ -751,11 +979,11 @@
                     title: 'Internal Marks Management System Demo',
                     content: `
                         <div class="text-left">
-                            <h4 class="font-semibold mb-2">Project Overview:</h4>
-                            <p class="mb-4">Web-based platform automating internal marks management with secure authentication.</p>
+                            <h4 class="font-semibold mb-2 text-gray-900">Project Overview:</h4>
+                            <p class="mb-4 text-gray-700">Web-based platform automating internal marks management with secure authentication.</p>
                             
-                            <h4 class="font-semibold mb-2">Key Features:</h4>
-                            <ul class="list-disc list-inside mb-4 space-y-1">
+                            <h4 class="font-semibold mb-2 text-gray-900">Key Features:</h4>
+                            <ul class="list-disc list-inside mb-4 space-y-1 text-gray-700">
                                 <li>Role-based access control (RBAC)</li>
                                 <li>Secure JWT authentication</li>
                                 <li>Real-time dashboards</li>
@@ -763,12 +991,12 @@
                                 <li>Email notifications</li>
                             </ul>
                             
-                            <h4 class="font-semibold mb-2">Technologies:</h4>
+                            <h4 class="font-semibold mb-2 text-gray-900">Technologies:</h4>
                             <div class="flex flex-wrap gap-2">
-                                <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">Node.js</span>
-                                <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs">Express.js</span>
-                                <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">MySQL</span>
-                                <span class="bg-orange-100 text-orange-800 px-2 py-1 rounded text-xs">JWT</span>
+                                <span class="tech-badge">Node.js</span>
+                                <span class="tech-badge">Express.js</span>
+                                <span class="tech-badge">MySQL</span>
+                                <span class="tech-badge">JWT</span>
                             </div>
                         </div>
                     `
@@ -815,7 +1043,7 @@
                     position: absolute;
                     width: 4px;
                     height: 4px;
-                    background: rgba(255, 255, 255, 0.5);
+                    background: rgba(255, 255, 255, 0.6);
                     border-radius: 50%;
                     left: ${Math.random() * 100}%;
                     top: ${Math.random() * 100}%;
@@ -832,8 +1060,6 @@
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('animate');
-                        
-                        // Trigger counter animation when about section is visible
                         if (entry.target.id === 'about') {
                             setTimeout(animateCounters, 500);
                         }
@@ -851,14 +1077,8 @@
             const navbar = document.getElementById('navbar');
             if (window.scrollY > 100) {
                 navbar.style.background = 'rgba(255, 255, 255, 0.95)';
-                if (document.body.classList.contains('dark')) {
-                    navbar.style.background = 'rgba(15, 23, 42, 0.95)';
-                }
             } else {
-                navbar.style.background = 'rgba(255, 255, 255, 0.8)';
-                if (document.body.classList.contains('dark')) {
-                    navbar.style.background = 'rgba(15, 23, 42, 0.8)';
-                }
+                navbar.style.background = 'rgba(255, 255, 255, 0.9)';
             }
         });
 
@@ -881,17 +1101,6 @@
             createParticles();
             setupAnimations();
             
-            // Add hover effects to skill badges
-            document.querySelectorAll('.skill-badge').forEach(badge => {
-                badge.addEventListener('mouseenter', function() {
-                    this.style.transform = 'scale(1.1) rotateZ(5deg)';
-                });
-                badge.addEventListener('mouseleave', function() {
-                    this.style.transform = 'scale(1) rotateZ(0deg)';
-                });
-            });
-
-            // Typewriter effect completion
             setTimeout(() => {
                 const typewriter = document.querySelector('.typewriter');
                 if (typewriter) {
@@ -899,7 +1108,6 @@
                 }
             }, 4000);
 
-            // Close mobile menu when clicking outside
             document.addEventListener('click', (e) => {
                 const mobileMenu = document.getElementById('mobileMenu');
                 const menuButton = document.querySelector('[onclick="toggleMobileMenu()"]');
